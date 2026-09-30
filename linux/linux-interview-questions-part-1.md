@@ -43,19 +43,31 @@
   - df -h
 
 * What commands do you know that can be used to check DNS records?
-  - dig +trace
-  - nslookup
-  - whois
-  - host
+Command	         Main purpose	                       Example
+dig	             Detailed DNS queries	               dig example.com
+dig +trace	     Trace DNS resolution from root	     dig +trace example.com
+nslookup	       Simple DNS lookup	                 nslookup example.com
+host	           Simple DNS lookup	                 host example.com
+whois	           Domain/IP registration information	 whois example.com
 
 * What Unix/Linux commands will alter a files ownership, files permissions?
-  - chmod, chown, chattr
+Command      	Changes	                 Example
+chmod	        Permissions	             chmod 755 script.sh
+chown	        Owner/group	             chown vipul:developers file.txt
+chattr	      Special file attributes	 chattr +i file.txt
 
 * What does ```chmod +x FILENAME```do?
   - Add a execute permission to a file for all users
 
 * What does the permission 0750 on a file mean?
   - Add a permission to the owner of the file write, execute and read, the group of the owner execute and read, and others do nothing
+  - 0750
+     │
+     └── rwxr-x---
+         │  │  │
+         │  │  └── Others: no access
+         │  └───── Group: read + execute
+         └──────── Owner: read + write + execute
 
 * What does the permission 0750 on a directory mean?
   - Add a permission to the owner of the folder, create, get access and list the directory files,for the group of the owner only enter and list the directory, and nothing for others.
@@ -67,9 +79,13 @@
   - useradd username -s /bin/false
 
 * How to add/remove a group from a user?
-  - usermod -a -G groupname username #to add a user in a new group
-  - usermod -G [all groups that you want the user into] username #You don't remove the user from a group, you add the user in all groups that this user is suppose to be.
-  - newgrp <GroupName> - Updates shell session with new group permissions
+Requirement	                      Command
+Add user to group      	          usermod -aG group user
+Remove user from group	          gpasswd -d user group
+See user's groups	                groups user
+Detailed group information	      id user
+Apply group to current shell	    newgrp group
+Change supplementary group list 	usermod -G group1,group2 user
 
 * What is a bash alias?
   - It's a shortcut for some bash command
@@ -82,8 +98,7 @@
   - send a SIGINT to the terminal (it's a polite kill)
 
 * What is in /etc/services?
-  - A mapping for services and ports, when a service call a function getportbyname() usually this function goes in this file to check.
-  - Example the command netstat or ss without the -n parameter
+- /etc/services is a system file that contains mappings between service names, port numbers, and protocols, such as ssh 22/tcp and http 80/tcp. Applications can use system APIs such as getservbyname() to resolve service names to port numbers. Commands such as ss or netstat without -n may display service names instead of numeric port numbers. The file itself does not indicate whether a service is actually running.
 
 * How to redirect STDOUT and STDERR in bash? (> /dev/null 2>&1)
   - 1> redirect the STDOUT
@@ -95,7 +110,7 @@
   - 2>&1 redirect STDERR to STDOUT
 
 * What is the difference between UNIX and Linux.
-  - Linux it's a UNIX "clone" using the same POSIX(Portable Operating System Interface) standards, but UNIX it's a brand, has different copyrights and tools.
+* UNIX is a family of operating systems that originated at Bell Labs, with systems such as AIX, Solaris, and HP-UX. Linux is an open-source Unix-like operating-system kernel created by Linus Torvalds. Linux follows many UNIX concepts and is largely POSIX-compatible (POSIX(Portable Operating System Interface) standards), but Linux itself is not the same as certified UNIX. UNIX systems can be proprietary and vendor-specific, while Linux distributions such as Ubuntu and RHEL are built around the open-source Linux kernel.
 
 * What is the diference between Telnet and SSH?
   - SSH it's encrypted and telnet isn't.
